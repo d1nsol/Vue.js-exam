@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>emit-events</title>
+</head>
+<body>
+
+    <!-- 이벤트 수신 -->
+    <div id="app">
+        <child-component v-on:show-log="printText"></child-component>
+    </div>
+
+    <script src="js/vue.js"></script>
+    <script>
+        // 이벤트 발생
+        // this.$emit('이벤트명');
+        // $emit 을 호출하는 위치는 하위 컴포넌트의 특정 메서드 내부
+        // 따라서 this 는 해당하는 하위 컴포넌트를 가리킴
+        Vue.component('child-component', {
+            template: '<button v-on:click="emitShowLog">show</button>', // 하위 컴포넌트의 버튼 요소 추가
+            // 메서드 추가
+            methods: {
+                emitShowLog: function() {
+                    this.$emit('show-log');
+                }
+            }
+        });
+
+        // 인스턴스 생성
+        new Vue({
+            el: '#app',
+            data: {
+                message: 'Hello Vue! passed from Parent Component'
+            },
+            methods: {
+                printText: function() {
+                    console.log('received an event');
+                }
+            }
+        })
+    </script>
+</body>
+</html>
