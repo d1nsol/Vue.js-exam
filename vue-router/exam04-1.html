@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>exam04-1</title>
+</head>
+<body>
+    <div id="app">
+        <h1>뷰 라우터 예제</h1>
+        <p>
+            <!-- ㅕURL 값을 변경하는 태그 -->
+            <router-link to="/main">Main 컴포넌트로 이동</router-link>
+            <router-link to="/login">Login 컴포넌트로 이동</router-link>
+        </p>
+        <router-view></router-view><!-- URL 값에 따라 갱신되는 화면 영역 -->
+    </div>
+    <script src="../js/vue.js"></script>
+    <script src="../js/vue-router.js"></script>
+    <script>
+        // Main, Login 컴포넌트 정의
+        var Main = {
+            template: '<div>main</div>'
+        };
+        var Login = {
+            template: '<div>login</div>'
+        };
+
+        // 각 URL 에 맞춰 표시할 컴포넌트 지정
+        var routes = [
+            {path: '/main', component: Main},
+            {path: '/login', component: Login}
+        ];
+
+        // 뷰 라우터 정의
+        const router = new VueRouter({
+            // mode: 'history', // 뷰 라우터의 기본 URL 형식은 해시 값, 히스토리 모드 사용 시 해시값을 없앨 수 있음
+            routes
+        });
+
+        // 뷰 인스턴스에 라우터 추가
+        new Vue({
+            router
+        }).$mount('#app'); // $mount() api : el 속성과 동일하게 인스턴스를 화면에 붙이는 역할, el 속성이 없더라고 $mount()를 이용하여 강제로 인스턴스를 화면에 붙일 수 있음
+    </script>
+</body>
+</html>
