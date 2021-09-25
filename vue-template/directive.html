@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Template Directives</title>
+</head>
+<body>
+    <div id="app">
+        <a v-if="flag">This is v-if directive</a>
+        <hr>
+        <ul>
+            <li v-for="item in items">{{item}}</li>
+        </ul>
+        <hr>
+        <p v-show="flag">This is v-show directive</p>
+        <hr>
+        <h5 v-bind:id="uid">This is v-bind directive</h5>
+        <hr>
+        <button v-on:click="popupAlert">This is v-on directive</button>
+        <hr>
+        <p>{{message}}</p>
+        <button v-on:click="reverseMsg">
+            reverse
+        </button>
+        <p v-if="isReverse">{{reverseMessage}}</p>
+        <hr>
+        <input type="text" v-model="message">
+    </div>
+
+    <script src="../js/vue.js"></script>
+    <script>
+        new Vue({
+            data: {
+                flag: true,
+                uid: '10',
+                items: ['a', 'b', 'c'],
+                message: 'Hello Vue.js!',
+                isReverse: false
+            },
+            methods: {
+                popupAlert: function() {
+                    this.flag = !this.flag;
+                    alert('v-on directive event');
+                },
+                reverseMsg: function() {
+                    this.message.split('').reverse().join('');
+                    this.isReverse = true;
+                }
+            },
+            computed: {
+                reverseMessage: function() {
+                    return this.message.split('').reverse().join('');
+                }
+            },
+            watch: {
+                message: function(data) {
+                    console.log('message의 값이 바뀝니다 : ', data);
+                }
+            }
+        }).$mount('#app');
+    </script>
+</body>
+</html>

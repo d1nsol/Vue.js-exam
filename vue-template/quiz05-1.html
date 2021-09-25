@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Template</title>
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h3>
+                {{message1}}
+            </h3>
+        </header>
+        <section>
+            <p v-bind:id="uid">{{message2}}</p>
+            <button v-on:click="clickBtn">버튼</button>
+            <!-- @: v-on: 간소화 문법 -->
+            <!-- <button @:click="clickBtn">버튼</button> -->
+            <ul v-if="flag">
+                <li v-for="item in items">{{item}}</li>
+            </ul>
+        </section>
+    </div>
+
+    <script src="../js/vue.js"></script>
+    <script>
+        new Vue({
+            data: {
+                message1: 'hello Vue.js',
+                message2: '배고프다',
+                uid: 20,
+                flag: true,
+                items: ['angular', 'react', 'vue']
+            },
+            methods: {
+                clickBtn: function() {
+                    this.flag = !this.flag;
+                    alert('hi');
+                }
+            }
+        }).$mount('#app');
+    </script>
+</body>
+</html>
